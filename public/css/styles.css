@@ -1,0 +1,199 @@
+body {
+  font-family: 'Merienda', cursive;
+  font-size: 20px;
+}
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #1abc9c !important;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 17px;
+    letter-spacing: 5px;
+
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+.navbar-brand {
+  font-size: 30px;
+  font-size: 4vw;
+}
+
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 115px;
+	background-color: #1abc9c;
+}
+
+.footer p {
+	margin-top: 25px;
+	font-size: 12px;
+  color: #fff;
+}
+
+.lagonatis {
+  color: #fff;
+}
+
+#slika {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: 70%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.RegLog {
+  margin: auto 10px;
+}
+
+.register {
+  margin-bottom: 30px;
+}
+
+.komentar-polje {
+  margin-top: 80px;
+}
+
+.komentari {
+  margin-top: 30px;
+}
+
+.autor {
+  font-size: 22px;
+}
+
+.forbiden {
+  margin-top: 70px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.kontakt {
+  border-style: outset;
+}
+
+.center {
+  text-align: center;
+}
+
+.hide {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+.potpis {
+  font-size: 20px;
+}
+
+.center {
+  margin: 30px auto;
+  width: 75%;
+}
+
+.thead {
+  background: #abffee;
+  font-size: 25px;
+}
+
+.row {
+  display: flex; 
+  flex-wrap: wrap;
+}
+
+
+
+
+.hovereffect {
+
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(1) blur(3px);
+  -webkit-filter: grayscale(1) blur(3px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid #fff;
+  margin: 50px 0 0 0;
+  background-color: transparent;
+}
+
+.hovereffect a.info:hover {
+  box-shadow: 0 0 5px #fff;
+}
+
+.hovereffect a.info, .hovereffect h2 {
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.hovereffect:hover a.info {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}

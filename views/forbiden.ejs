@@ -1,0 +1,11 @@
+<%- include("partials/header1"); -%>
+
+
+<div class="forbiden">
+<h3>Ovaj komentar može uređivati i brisati samo <strong><%= korisnikKomentara %></strong>.</h3>
+
+
+<a type="submit" class="btn btn-lg btn-warning" href="/posts/<%= requestedPostId %>">Povratak na post</a>
+</div>
+
+<%- include("partials/footer"); -%>

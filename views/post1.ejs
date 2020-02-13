@@ -1,0 +1,48 @@
+<%- include("partials/header1"); -%>
+
+  <h1><%=title%></h1>
+  <p><%=content%></p>
+  <p class="pull-right"><em><%=date%></em></p>
+
+  <p class="potpis">Vaša CRO シ 😘</p>
+
+<div class="komentar-polje">
+
+<form action="/comment" method="post">
+  <fieldset disabled>
+    <div class="form-group">
+      <label for="disabledTextInput">Ostavi komentar:</label>
+      <textarea name="content" id="disabledTextInput" class="form-control" placeholder="Komentar možete upisati ako ste logirani" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Komentiraj</button>
+  </fieldset>
+</form>
+
+</div>
+
+<div class="komentari">
+  <%  comments.forEach(function(comment){ %>
+<strong class="autor"><%= comment.author %></strong> kaže: <em><%= comment.content %></em>
+<p><small><em><%= comment.date.toDateString() %></em></small></p>
+
+  <% if( korisnik == comment.author ){ %>
+
+<form id="myDIV" class="" method="POST">
+<a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
+<a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
+</form>
+
+  <% } else { %>
+
+<form id="myDIV" class="hide" method="POST">
+<a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
+<a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
+</form>
+
+  <% } %>
+
+    <% }) %>
+</div>
+
+
+<%- include("partials/footer"); -%>

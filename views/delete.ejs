@@ -1,0 +1,27 @@
+<%- include("partials/header2"); -%>
+
+
+
+  <div class="forbiden">
+
+
+
+<form action="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/delete?_method=DELETE" method="POST">
+
+
+    Jeste li sigurni da želite obrisati komentar: <strong><em><%= comment.content %></em></strong> ?
+
+    <p class="forbiden">
+    <a href="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/edit?_method=DELETE"><button type="submit" class="btn btn-primary">Obriši</button></a>
+    </p>
+
+
+</form>
+
+
+  </div>
+
+
+
+
+<%- include("partials/footer"); -%>
