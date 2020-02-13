@@ -1,35 +1,21 @@
 <%- include("partials/header2"); -%>
-
-  <h1><%=title%></h1>
-  <p><%=content%></p>
-  <p class="pull-right"><em><%=date%></em></p>
-
-  <p class="potpis">Vaša CRO シ 😘</p>
-
-
+<h1><%=title%></h1>
+<p><%=content%></p>
+<p class="pull-right"><em><%=date%></em></p>
+<p class="potpis">Vaša CRO シ 😘</p>
 <div class="komentar-polje">
-<a type="submit" href="/posts/<%= requestedPostId %>/comment" class="btn btn-primary">Komentiraj</a>
-<a type="submit" href="/posts/<%= requestedPostId %>/edit" class="btn btn-success">Uredi</a>
-<a type="submit" href="/posts/<%= requestedPostId %>/delete" class="btn btn-danger">Obriši</a>
+   <a type="submit" href="/posts/<%= requestedPostId %>/comment" class="btn btn-primary">Komentiraj</a>
+   <a type="submit" href="/posts/<%= requestedPostId %>/edit" class="btn btn-success">Uredi</a>
+   <a type="submit" href="/posts/<%= requestedPostId %>/delete" class="btn btn-danger">Obriši</a>
 </div>
-
 <div class="komentari">
-  <%  comments.forEach(function(comment){ %>
-
-<strong class="autor"><%= comment.author %></strong> kaže: <em><%= comment.content %></em>
-<p><small><em><%= comment.date.toDateString() %></em></small></p>
-
-
-<form id="myDIV" class="" method="POST">
-<a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
-<a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
-</form>
-
-
-    <% }) %>
-
-
+   <%  comments.forEach(function(comment){ %>
+   <strong class="autor"><%= comment.author %></strong> kaže: <em><%= comment.content %></em>
+   <p><small><em><%= comment.date.toDateString() %></em></small></p>
+   <form id="myDIV" class="" method="POST">
+      <a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
+      <a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
+   </form>
+   <% }) %>
 </div>
-
-
 <%- include("partials/footer"); -%>

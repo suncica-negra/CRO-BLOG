@@ -1,35 +1,30 @@
 <%- include('partials/header1') %>
 <div class="container mt-5">
-  <h1 class="register">Registriraj se</h1>
-
-  <div class="row">
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
-
-          <!-- Makes POST request to /register route -->
-          <form action="/register" method="POST">
-            <div class="form-group">
-              <label for="email">Korisničko ime ***</label>
-              <input class="form-control" placeholder="Upišite Vaše (korisničko) ime" name="username" required>
+   <h1 class="register">Registriraj se</h1>
+   <div class="row">
+      <div class="col-sm-8">
+         <div class="card">
+            <div class="card-body">
+               <!-- Makes POST request to /register route -->
+               <form action="/register" method="POST">
+                  <div class="form-group">
+                     <label for="email">Korisničko ime ***</label>
+                     <input class="form-control" placeholder="Upišite Vaše (korisničko) ime" name="username" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="email">Email ***</label>
+                     <input type="email" class="form-control" placeholder="Upišite Vaš email" name="email" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="password">Zaporka / šifra</label>
+                     <input type="password" class="form-control" placeholder="Upišite Vašu zaporku / šifru koja mora sadržavati minimalno 6 znakova" name="password" required pattern=".{6,}">
+                  </div>
+                  <p><small>*** Ukoliko su korisničko ime i/ili email jednaki već upisanima u bazu, ne možete se registrirati. Korisničko ime i email moraju biti jedinstveni.</small></p>
+                  <button type="submit" class="btn btn-dark">Registriraj me</button>
+               </form>
             </div>
-            <div class="form-group">
-              <label for="email">Email ***</label>
-              <input type="email" class="form-control" placeholder="Upišite Vaš email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Zaporka / šifra</label>
-              <input type="password" class="form-control" placeholder="Upišite Vašu zaporku / šifru koja mora sadržavati minimalno 6 znakova" name="password" required pattern=".{6,}">
-            </div>
-            <p><small>*** Ukoliko su korisničko ime i/ili email jednaki već upisanima u bazu, ne možete se registrirati. Korisničko ime i email moraju biti jedinstveni.</small></p>
-            <button type="submit" class="btn btn-dark">Registriraj me</button>
-          </form>
-
-        </div>
+         </div>
       </div>
-    </div>
-
-  </div>
+   </div>
 </div>
-
 <%- include('partials/footer') %>

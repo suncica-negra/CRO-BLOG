@@ -126,9 +126,6 @@ a:hover {
   flex-wrap: wrap;
 }
 
-
-
-
 .hovereffect {
 
   float: left;
@@ -162,8 +159,6 @@ a:hover {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
-
-
 
 .hovereffect a.info {
   display: inline-block;

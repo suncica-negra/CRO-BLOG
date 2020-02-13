@@ -1,31 +1,14 @@
 <%- include("partials/header2"); -%>
-
-
-
-  <div class="komentar-polje">
-
-
-
-<form action="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/edit?_method=PUT" method="POST">
-  <fieldset>
-    <div class="form-group">
-      <label >Uredi komentar: </label>
-      <textarea name="content" class="form-control" required><%= comment.content %></textarea>
-    
-  <small>*** Vlasnica bloga zadržava pravo brisanja svakog komentara koji nije u skladu s lijepim ponašanjem na webu!</small>
-
-    </div>
-
-
-    <a href="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/edit?_method=PUT"><button type="submit" class="btn btn-primary">Uredi</button></a>
-
-  </fieldset>
-</form>
-
-
-  </div>
-
-
-
-
+<div class="komentar-polje">
+   <form action="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/edit?_method=PUT" method="POST">
+      <fieldset>
+         <div class="form-group">
+            <label >Uredi komentar: </label>
+            <textarea name="content" class="form-control" required><%= comment.content %></textarea>
+            <small>*** Vlasnica bloga zadržava pravo brisanja svakog komentara koji nije u skladu s lijepim ponašanjem na webu!</small>
+         </div>
+         <a href="/posts/<%= requestedPostId %>/comment/<%= requestedCommentId %>/<%= requestedCommentAuthor %>/edit?_method=PUT"><button type="submit" class="btn btn-primary">Uredi</button></a>
+      </fieldset>
+   </form>
+</div>
 <%- include("partials/footer"); -%>

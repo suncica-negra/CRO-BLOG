@@ -1,26 +1,14 @@
 <%- include("partials/header2"); -%>
-
-
-  <div class="komentar-polje">
-
-
-
-<form action="/posts/<%= requestedPostId %>/comment" method="post">
-  <fieldset>
-    <div class="form-group">
-      <label >Komentiraj post: <em><%= title %></em></label>
-      <textarea name="content" class="form-control" placeholder="Upišite komentar" required></textarea>
-    
-  <small>*** Vlasnica bloga zadržava pravo brisanja svakog komentara koji nije u skladu s lijepim ponašanjem na webu!</small>
-
-    </div>
-
-    <button type="submit" class="btn btn-primary">Komentiraj</button>
-  </fieldset>
-</form>
-
-
-  </div>
-
-
+<div class="komentar-polje">
+   <form action="/posts/<%= requestedPostId %>/comment" method="post">
+      <fieldset>
+         <div class="form-group">
+            <label >Komentiraj post: <em><%= title %></em></label>
+            <textarea name="content" class="form-control" placeholder="Upišite komentar" required></textarea>
+            <small>*** Vlasnica bloga zadržava pravo brisanja svakog komentara koji nije u skladu s lijepim ponašanjem na webu!</small>
+         </div>
+         <button type="submit" class="btn btn-primary">Komentiraj</button>
+      </fieldset>
+   </form>
+</div>
 <%- include("partials/footer"); -%>

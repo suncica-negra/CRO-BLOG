@@ -1,27 +1,10 @@
 <%- include("partials/header2"); -%>
-
-
-
-  <div class="forbiden">
-
-
-
-<form action="/posts/<%= requestedPostId %>/delete?_method=DELETE" method="POST">
-
-
-    Jeste li sigurni da želite obrisati post s naslovom: <strong><em><%= post.title %></em></strong> ?
-
-    <p class="forbiden">
-    <a href="/posts/<%= requestedPostId %>/edit?_method=DELETE"><button type="submit" class="btn btn-primary">Obriši</button></a>
-    </p>
-
-
-</form>
-
-
-  </div>
-
-
-
-
-<%- include("partials/footer"); -%>
+<div class="forbiden">
+   <form action="/posts/<%= requestedPostId %>/delete?_method=DELETE" method="POST">
+      Jeste li sigurni da želite obrisati post s naslovom: <strong><em><%= post.title %></em></strong> ?
+      <p class="forbiden">
+         <a href="/posts/<%= requestedPostId %>/edit?_method=DELETE"><button type="submit" class="btn btn-primary">Obriši</button></a>
+      </p>
+   </form>
+</div>
+<%- include("partials/footer"); -%
