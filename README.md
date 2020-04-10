@@ -3,35 +3,35 @@ Blog
 
 Aplikacija je funkcionalna i online je: https://hidden-plateau-63597.herokuapp.com
 
-POČETNA STRANICA
+## POČETNA STRANICA
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog1.png)
 
-TROŠKOVI
+## TROŠKOVI
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog2.png)
 
-FOTOGALERIJA
+## FOTOGALERIJA
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog3.png)
 
-REGISTRACIJA
+## REGISTRACIJA
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog4.png)
 
-ADMIN KOMANDE
+## ADMIN KOMANDE
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog5.png)
 
-DODAJ POST
+## DODAJ POST
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog6.png)
 
-ADMIN ULOGIRAN
+## ADMIN ULOGIRAN
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog7.png)
 
-BILO KOJI USER ULOGIRAN
+## BILO KOJI USER ULOGIRAN
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog8.png)
 
