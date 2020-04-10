@@ -1,6 +1,8 @@
 # CRO-BLOG
 Blog
 
+Spojen na MongoDB bazu u koju pohranjuje usere, postove i komentare. Postovi i komentari se mogu dodavati, editirati i brisati ovisno o korisniku - admin (ja) mogu sve, pojedini korisnik može editirati i brisati samo svoje komentare, ne može dodavati postove.
+
 Aplikacija je funkcionalna i online je: https://hidden-plateau-63597.herokuapp.com
 
 ## POČETNA STRANICA
