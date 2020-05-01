@@ -22,35 +22,35 @@ Korišteni alati: **HTML, CSS, JavaScript, Node.js, Express.js, EJS, MongooDB**
 
 Aplikacija je funkcionalna i online je: https://hidden-plateau-63597.herokuapp.com
 
-## POČETNA STRANICA
+## POČETNA STRANICA / landing page
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog1.png)
 
-## TROŠKOVI
+## TROŠKOVI / costs
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog2.png)
 
-## FOTOGALERIJA
+## FOTOGALERIJA / photo gallery
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog3.png)
 
-## REGISTRACIJA
+## REGISTRACIJA register
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog4.png)
 
-## ADMIN KOMANDE
+## ADMIN KOMANDE / admin commands
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog5.png)
 
-## DODAJ POST
+## DODAJ POST / add post
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog6.png)
 
-## ADMIN ULOGIRAN
+## ADMIN ULOGIRAN / admin logged in
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog7.png)
 
-## BILO KOJI USER ULOGIRAN
+## BILO KOJI USER ULOGIRAN / any user logged in
 
 ![alt text](https://github.com/suncica-negra/CRO-BLOG/blob/master/public/images/blog8.png)
 
