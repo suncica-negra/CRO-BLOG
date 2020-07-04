@@ -8,7 +8,7 @@ Connected to a MongoDB database that stores files, posts, and comments. Posts an
 
 Tools Used: **HTML, CSS, JavaScript, Node.js, Express.js, EJS, MongooDB**
 
-The app is functional and is online: https://hidden-plateau-63597.herokuapp.com
+The app is functional and online: https://hidden-plateau-63597.herokuapp.com
 
 **************************************************
 
