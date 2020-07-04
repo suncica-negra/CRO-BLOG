@@ -19,12 +19,12 @@
    <strong class="autor"><%= comment.author %></strong> kaže: <em><%= comment.content %></em>
    <p><small><em><%= comment.date.toDateString() %></em></small></p>
    <% if( korisnik == comment.author ){ %>
-   <form id="myDIV" class="" method="POST">
+   <form class="" method="POST">
       <a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
       <a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
    </form>
    <% } else { %>
-   <form id="myDIV" class="hide" method="POST">
+   <form class="hide" method="POST">
       <a type="button" class="btn btn-xs btn-success" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/edit" >Uredi</a>
       <a type="button" class="btn btn-xs btn-danger" href="/posts/<%= requestedPostId %>/comment/<%= comment._id %>/<%= comment.author %>/delete" >Obriši</a>
    </form>

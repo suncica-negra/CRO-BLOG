@@ -2,6 +2,7 @@ body {
   font-family: 'Merienda', cursive;
   font-size: 20px;
 }
+
 html {
   min-height: 100%;
   position: relative;
@@ -13,43 +14,45 @@ a:hover {
 }
 
 .container-fluid {
-    padding-top: 70px;
-    padding-bottom: 70px;
+  padding-top: 70px;
+  padding-bottom: 70px;
 }
-.navbar {
-    padding-top: 15px;
-    padding-bottom: 10px;
-    border: 0;
-    border-radius: 0;
-    margin-bottom: 0;
-    font-size: 17px;
-    letter-spacing: 5px;
 
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 17px;
+  letter-spacing: 5px;
 }
-.navbar-nav  li a:hover {
-    color: #1abc9c !important;
+
+.navbar-nav li a:hover {
+  color: #1abc9c !important;
 }
+
 .navbar-brand {
   font-size: 30px;
   font-size: 4vw;
 }
 
 .footer-padding {
-	padding-bottom: 60px;
+  padding-bottom: 60px;
 }
 
 .footer {
-	position: absolute;
-	text-align: center;
-	bottom: 0;
-	width: 100%;
-	height: 115px;
-	background-color: #1abc9c;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 115px;
+  background-color: #1abc9c;
 }
 
 .footer p {
-	margin-top: 25px;
-	font-size: 12px;
+  margin-top: 25px;
+  font-size: 12px;
   color: #fff;
 }
 
@@ -102,9 +105,9 @@ a:hover {
 }
 
 .hide {
-    background: transparent;
-    border: none !important;
-    font-size:0;
+  background: transparent;
+  border: none !important;
+  font-size: 0;
 }
 
 .potpis {
@@ -122,12 +125,11 @@ a:hover {
 }
 
 .row {
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
 }
 
 .hovereffect {
-
   float: left;
   overflow: hidden;
   position: relative;
@@ -173,7 +175,8 @@ a:hover {
   box-shadow: 0 0 5px #fff;
 }
 
-.hovereffect a.info, .hovereffect h2 {
+.hovereffect a.info,
+.hovereffect h2 {
   -webkit-transform: scale(0.7);
   -ms-transform: scale(0.7);
   transform: scale(0.7);

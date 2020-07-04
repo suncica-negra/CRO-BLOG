@@ -8,7 +8,6 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const methodOverride = require("method-override");
 
-
 const homeStartingContent = "Ovaj blog je zamišljen da bude kao dnevnik onoga kroz što prolazim dok radim kao nastavnica u školi, učim za promjenu profesije, nalazim prve poslove u novoj profesiji, pokušavam preživjeti šetnje sa svojom `psinom` i uz to gradim svoju-kućicu-svoju-slobodicu.";
 const aboutContent = "Tko sam? 33-godišnja žena koja živi u Hrvatskoj. Bez riješenog stambenog pitanja, s poslom koji nije siguran. Imam udomljenog ženskog psa s kojim je svaka šetnja izazov. Na putu sam promjene profesije i zauvijek napuštam prosvjetu koja nastavnike tretira kao `državnog neprijatelja`.";
 const contactContent = "Možete me kontaktirati na: ";
@@ -25,7 +24,7 @@ app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
 app.use(session({
-  secret: "",
+  secret: "Naša mala tajna.",
   resave: true,
   saveUninitialized: true
 }));
@@ -33,8 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-mongoose.connect("mongodb+srv://@cluster0-wwrbr.mongodb.net/blog", {
+mongoose.connect("mongodb+srv://username:password@cluster0-wwrbr.mongodb.net/blogDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
@@ -60,7 +58,7 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  author: String,
+  author: String, 
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Comment"
@@ -73,7 +71,7 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  author: String,
+  author: String, 
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
@@ -92,13 +90,23 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
+
+function notLoggedIn(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/");
+}
 
 app.get("/", function (req, res) {
-
-  if (req.session.passport === undefined) {
-
+  if (!req.session.passport) {
     var korisnik = "";
-
     Post.find({}).sort({
       date: -1
     }).exec(function (err, posts) {
@@ -108,10 +116,8 @@ app.get("/", function (req, res) {
         korisnik: korisnik
       });
     });
-  } else if (req.session.passport.user === "") {
-
+  } else if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
-
     Post.find({}).sort({
       date: -1
     }).exec(function (err, posts) {
@@ -122,9 +128,7 @@ app.get("/", function (req, res) {
       });
     });
   } else {
-
     var korisnik = req.session.passport.user;
-
     Post.find({}).sort({
       date: -1
     }).exec(function (err, posts) {
@@ -138,8 +142,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     var korisnik = "";
     res.render("about1", {
       aboutContent: aboutContent,
@@ -152,12 +155,10 @@ app.get("/about", function (req, res) {
       korisnik: korisnik
     });
   }
-
 });
 
 app.get("/contact", function (req, res) {
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     var korisnik = "";
     res.render("contact1", {
       contactContent: contactContent,
@@ -170,12 +171,10 @@ app.get("/contact", function (req, res) {
       korisnik: korisnik
     });
   }
-
 });
 
-app.get("/compose", function (req, res) {
-
-  if (req.session.passport === undefined) {
+app.get("/compose", isLoggedIn, function (req, res) {
+  if (!req.session.passport) {
     var korisnik = "";
     res.render("login", {
       korisnik: korisnik
@@ -186,12 +185,10 @@ app.get("/compose", function (req, res) {
       korisnik: korisnik
     });
   }
-
 });
 
-app.post("/compose", function (req, res) {
-
-  if (req.session.passport === undefined) {
+app.post("/compose", isLoggedIn, function (req, res) {
+  if (!req.session.passport) {
     res.redirect("/login");
   } else {
     const post = new Post({
@@ -199,21 +196,17 @@ app.post("/compose", function (req, res) {
       content: req.body.postBody,
       author: req.session.passport.user
     });
-
     post.save(function (err) {
       if (!err) {
         res.redirect("/");
       }
     });
   }
-
 });
 
 app.get("/posts/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
-
-  if (req.session.passport === undefined) {
-
+  if (!req.session.passport) {
     Post.findOne({
       _id: requestedPostId
     }).populate("comments").exec(function (err, post) {
@@ -221,8 +214,8 @@ app.get("/posts/:postId", function (req, res) {
         path: "comments"
       }, function (err, comments) {
         post.comments = comments;
-        for (i = 0; i < comments.length; i++) {}
-
+        for (i = 0; i < comments.length; i++) {
+        }
         res.render("post1", {
           title: post.title,
           content: post.content,
@@ -233,7 +226,7 @@ app.get("/posts/:postId", function (req, res) {
         });
       });
     });
-  } else if (req.session.passport.user === "") {
+  } else if (req.session.passport.user === "cro-blogerica") {
     const korisnik = req.session.passport.user;
     Post.findOne({
       _id: requestedPostId
@@ -242,8 +235,8 @@ app.get("/posts/:postId", function (req, res) {
         path: "comments"
       }, function (err, comments) {
         post.comments = comments;
-        for (i = 0; i < comments.length; i++) {}
-
+        for (i = 0; i < comments.length; i++) {
+        }
         res.render("post2", {
           title: post.title,
           content: post.content,
@@ -263,8 +256,8 @@ app.get("/posts/:postId", function (req, res) {
         path: "comments"
       }, function (err, comments) {
         post.comments = comments;
-        for (i = 0; i < comments.length; i++) {}
-
+        for (i = 0; i < comments.length; i++) {
+        }
         res.render("post", {
           title: post.title,
           content: post.content,
@@ -278,12 +271,10 @@ app.get("/posts/:postId", function (req, res) {
   }
 });
 
-
-app.get("/posts/:postId/comment", function (req, res) {
+app.get("/posts/:postId/comment", isLoggedIn, function (req, res) {
   var korisnik = req.session.passport.user;
   const requestedPostId = req.params.postId;
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     res.redirect("/login");
   } else {
     Post.findOne({
@@ -299,10 +290,9 @@ app.get("/posts/:postId/comment", function (req, res) {
   }
 });
 
-app.post("/posts/:postId/comment", function (req, res) {
+app.post("/posts/:postId/comment", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     res.redirect("/login");
   } else {
     Post.findOne({
@@ -313,13 +303,10 @@ app.post("/posts/:postId/comment", function (req, res) {
         author: req.session.passport.user,
         post: requestedPostId
       });
-
       comment.save(function (err) {
         if (!err) {
-
           post.comments.unshift(comment);
           post.save();
-
           res.redirect("/posts/" + requestedPostId);
         }
       });
@@ -327,10 +314,10 @@ app.post("/posts/:postId/comment", function (req, res) {
   }
 });
 
-app.get("/posts/:postId/edit", function (req, res) {
+app.get("/posts/:postId/edit", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   var korisnik = req.session.passport.user;
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     Post.findOne({
       _id: requestedPostId
     }, function (err, post) {
@@ -343,15 +330,14 @@ app.get("/posts/:postId/edit", function (req, res) {
         content: content
       });
     });
-
   } else {
     res.redirect("/login");
   }
 });
 
-app.put("/posts/:postId/edit", function (req, res) {
+app.put("/posts/:postId/edit", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Post.findOneAndUpdate({
       _id: requestedPostId
@@ -373,9 +359,10 @@ app.put("/posts/:postId/edit", function (req, res) {
   }
 });
 
-app.get("/posts/:postId/delete", function (req, res) {
+
+app.get("/posts/:postId/delete", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Post.findById(requestedPostId, function (err, foundPost) {
       res.render("delete2", {
@@ -389,7 +376,7 @@ app.get("/posts/:postId/delete", function (req, res) {
   }
 });
 
-app.delete("/posts/:postId/delete", function (req, res) {
+app.delete("/posts/:postId/delete", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   var korisnik = req.session.passport.user;
   Post.findOneAndDelete({
@@ -402,16 +389,14 @@ app.delete("/posts/:postId/delete", function (req, res) {
   res.redirect("/");
 });
 
-app.get("/posts/:postId/comment/:commentId/:commentAuthor/edit", function (req, res) {
+app.get("/posts/:postId/comment/:commentId/:commentAuthor/edit", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   const requestedCommentId = req.params.commentId;
   const requestedCommentAuthor = req.params.commentAuthor;
   var korisnik = req.session.passport;
-
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Comment.findById(requestedCommentId, function (err, foundComment) {
-
       res.render("edit", {
         korisnik: korisnik,
         requestedPostId: requestedPostId,
@@ -420,28 +405,32 @@ app.get("/posts/:postId/comment/:commentId/:commentAuthor/edit", function (req, 
         comment: foundComment
       });
     });
-  } else if (req.session.passport === undefined || req.session.passport.user != requestedCommentAuthor) {
+  } else if (!req.session.passport || req.session.passport.user != requestedCommentAuthor) {
     res.render("forbiden", {
       korisnik: korisnik,
       requestedPostId: requestedPostId,
       korisnikKomentara: requestedCommentAuthor
     });
-
   } else {
     var korisnik = req.session.passport.user;
     Comment.findById(requestedCommentId, function (err, foundComment) {
-
+      res.render("edit", {
+        korisnik: korisnik,
+        requestedPostId: requestedPostId,
+        requestedCommentId: requestedCommentId,
+        requestedCommentAuthor: requestedCommentAuthor,
+        comment: foundComment
+      });
     });
   }
 });
 
-app.put("/posts/:postId/comment/:commentId/:commentAuthor/edit", function (req, res) {
+app.put("/posts/:postId/comment/:commentId/:commentAuthor/edit", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   const requestedCommentId = req.params.commentId;
   const requestedCommentAuthor = req.params.commentAuthor;
   var korisnik = req.session.passport;
-
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Comment.findOneAndUpdate({
       _id: requestedCommentId
@@ -457,7 +446,7 @@ app.put("/posts/:postId/comment/:commentId/:commentAuthor/edit", function (req, 
       }
       res.redirect("/posts/" + requestedPostId);
     });
-  } else if (req.session.passport === undefined || req.session.passport.user != requestedCommentAuthor) {
+  } else if (!req.session.passport || req.session.passport.user != requestedCommentAuthor) {
     var korisnik = req.session.passport.user;
     res.render("forbiden", {
       korisnik: korisnik,
@@ -483,16 +472,14 @@ app.put("/posts/:postId/comment/:commentId/:commentAuthor/edit", function (req, 
   }
 });
 
-app.get("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (req, res) {
+app.get("/posts/:postId/comment/:commentId/:commentAuthor/delete", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   const requestedCommentId = req.params.commentId;
   const requestedCommentAuthor = req.params.commentAuthor;
   var korisnik = req.session.passport;
-
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Comment.findById(requestedCommentId, function (err, foundComment) {
-
       res.render("delete", {
         korisnik: korisnik,
         requestedPostId: requestedPostId,
@@ -501,7 +488,7 @@ app.get("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (req
         comment: foundComment
       });
     });
-  } else if (req.session.passport === undefined || req.session.passport.user != requestedCommentAuthor) {
+  } else if (!req.session.passport || req.session.passport.user != requestedCommentAuthor) {
     res.render("forbiden", {
       korisnik: korisnik,
       requestedPostId: requestedPostId,
@@ -510,7 +497,6 @@ app.get("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (req
   } else {
     var korisnik = req.session.passport.user;
     Comment.findById(requestedCommentId, function (err, foundComment) {
-
       res.render("delete", {
         korisnik: korisnik,
         requestedPostId: requestedPostId,
@@ -522,13 +508,12 @@ app.get("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (req
   }
 });
 
-app.delete("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (req, res) {
+app.delete("/posts/:postId/comment/:commentId/:commentAuthor/delete", isLoggedIn, function (req, res) {
   const requestedPostId = req.params.postId;
   const requestedCommentId = req.params.commentId;
   const requestedCommentAuthor = req.params.commentAuthor;
   var korisnik = req.session.passport;
-
-  if (req.session.passport.user === "") {
+  if (req.session.passport.user === "cro-blogerica") {
     var korisnik = req.session.passport.user;
     Comment.findOneAndDelete({
       _id: requestedCommentId
@@ -538,7 +523,7 @@ app.delete("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (
       }
     });
     res.redirect("/posts/" + requestedPostId);
-  } else if (req.session.passport === undefined || req.session.passport.user != requestedCommentAuthor) {
+  } else if (!req.session.passport || req.session.passport.user != requestedCommentAuthor) {
     res.render("forbiden", {
       korisnik: korisnik,
       requestedPostId: requestedPostId,
@@ -558,8 +543,7 @@ app.delete("/posts/:postId/comment/:commentId/:commentAuthor/delete", function (
 });
 
 app.get("/troskovi", function (req, res) {
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     var korisnik = "";
     res.render("troskovi1", {
       korisnik: korisnik
@@ -570,12 +554,10 @@ app.get("/troskovi", function (req, res) {
       korisnik: korisnik
     });
   }
-
 });
 
 app.get("/foto", function (req, res) {
-
-  if (req.session.passport === undefined) {
+  if (!req.session.passport) {
     var korisnik = "";
     res.render("foto1", {
       korisnik: korisnik
@@ -586,22 +568,19 @@ app.get("/foto", function (req, res) {
       korisnik: korisnik
     });
   }
-
 });
 
-app.get("/register", function (req, res) {
+app.get("/register", notLoggedIn, function (req, res) {
   res.render("register", {
     korisnik: korisnik
   });
 });
 
-app.post("/register", function (req, res) {
-
+app.post("/register", notLoggedIn, function (req, res) {
   const newUser = new User({
     username: req.body.username,
     email: req.body.email
   });
-
   User.register(newUser, req.body.password, function (err, user) {
     if (err) {
       console.log(err);
@@ -614,14 +593,13 @@ app.post("/register", function (req, res) {
   });
 });
 
-app.get("/login", function (req, res) {
+app.get("/login", notLoggedIn, function (req, res) {
   res.render("login", {
     korisnik: korisnik
   });
 });
 
-app.post("/login", function (req, res) {
-
+app.post("/login", notLoggedIn, function (req, res) {
   const user = new User({
     username: req.body.username,
     password: req.body.password
@@ -633,19 +611,17 @@ app.post("/login", function (req, res) {
     } else {
       passport.authenticate("local")(req, res, function () {
         var korisnik = req.session.passport.user;
-
         res.redirect("/");
       });
     }
   });
 });
 
-app.get("/logout", function (req, res) {
+app.get("/logout", isLoggedIn, function (req, res) {
   req.logout();
   req.session.destroy();
   res.redirect("/");
 });
-
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server started.");
